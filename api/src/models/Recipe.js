@@ -7,7 +7,7 @@ module.exports = (sequelize) => {
     id: {
       type: DataTypes.UUID,
       allowNull: false,
-      primarykey: true,
+      primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     steps: {
-     type: DataTypes.ARRAY,
+     type: DataTypes.STRING,
     },
   });
 };
