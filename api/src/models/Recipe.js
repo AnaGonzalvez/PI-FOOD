@@ -6,12 +6,16 @@ module.exports = (sequelize) => {
   sequelize.define("recipe", {
     id: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
       allowNull: false,
       primaryKey: true,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    image: {
+      type: DataTypes.STRING,
     },
     summary: {
       type: DataTypes.STRING,
@@ -20,7 +24,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
     },
     steps: {
-     type: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
   });
 };
