@@ -64,11 +64,52 @@ const getAllRecipes = async (req, res, next) => {
  }
 };
 
+const detailDb = async (id) =>{
+ const recipes = await getDbRecipes();
+ const detail = recipes.filter(e => { e.id.toString() === id.toString()});
 
+ if(detail) return detail;
+ else return "Recipe not found";
+};
+
+const detailApi = async (id) =>{
+ const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`).data;
+
+ if(recipeDetails){
+  return {
+   id: recipeDetails.id,
+   name: recipeDetails.title,
+   image: recipeDetails.image,
+   summary: recipeDetails.summary,
+   health_score: recipeDetails.healthScore,
+   steps: recipeDetails.analyzedInstructions.steps.map((e) => {
+     return {
+       number: e.number,
+       step: e.step,
+     };
+   }),
+   diets: recipeDetails.diets,
+   dish_types: recipeDetails.dishTypes,
+   cuisines: recipeDetails.cuisines,
+ };
+ }else{
+  return 'Recipe not found';
+ }
+};
 
 const getRecipeDetail = async (req, res, next) => {
  try {
-  
+  const idReceta = req.params.idReceta;
+  let detail;
+
+  if(idReceta.length > 6){
+   detail = detailDb(idReceta);   
+  }else{
+   detail = detailApi(idReceta);
+  }
+
+  res.status(200).send(detail);
+
  } catch (error) {
   next(error);
  }
@@ -76,6 +117,27 @@ const getRecipeDetail = async (req, res, next) => {
 
 const createRecipe = async (req, res, next) => {
  try {
+  const { name, image, summary, health_score, steps, diets } = req.body;
+
+  let recipe = await Recipe.create({
+    name,
+    image,
+    summary,
+    health_score,
+    steps
+  });
+
+  let diet = await diets.map(e => {
+    Diet.findAll({
+    where:{
+     name: e,
+    }
+   })
+  });
+  
+  recipe.addDiet(diet);
+
+  res.status(200).send('Recipe created successfully');
   
  } catch (error) {
   next(error);
