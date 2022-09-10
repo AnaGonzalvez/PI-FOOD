@@ -13,12 +13,13 @@ const getApiRecipes = async () => {
     image: e.image,
     summary: e.summary,
     health_score: e.healthScore,
-    steps: e.analyzedInstructions[0]?.steps.map(el => {
+    steps: e.analyzedInstructions[0]? e.analyzedInstructions[0].steps.map(el => {
      return {
       number: el.number,
       step: el.step,
      }
-    }),
+    })
+    : 'No instructions',
   }; 
  }); 
 
@@ -91,12 +92,14 @@ const detailApi = async (id) =>{
     image: recipeDetails.data.image,
     summary: recipeDetails.data.summary,
     health_score: recipeDetails.data.healthScore,
-    steps: recipeDetails.data.analyzedInstructions[0]?.steps.map((e) => {
-      return {
-        number: e.number,
-        step: e.step,
-      };
-    }),
+    steps: e.analyzedInstructions[0]? 
+    e.analyzedInstructions[0].steps.map(el => {
+     return {
+      number: el.number,
+      step: el.step,
+     }
+    })
+    : 'No instructions',
     diets: recipeDetails.data.diets,
     dish_types: recipeDetails.data.dishTypes,
     cuisines: recipeDetails.data.cuisines,
