@@ -1,24 +1,26 @@
-require("dotenv").config();
+//require("dotenv").config();
 const axios = require("axios");
 const { Recipe, Diet } = require("../db");
-const { API_KEY } = process.env;
+const { API_KEY, API_KEY1, API_KEY2 } = process.env;
 
 const getApiRecipes = async () => {
- let recipes = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`).data.results.map(e => {
+ const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=2`);
+ 
+ const recipes = await recipesApi.data.results.map(e => {
   return {
     id: e.id,
     name: e.title,
     image: e.image,
     summary: e.summary,
     health_score: e.healthScore,
-    steps: e.analyzedInstructions.steps.map(e => {
+    steps: e.analyzedInstructions[0]?.steps.map(el => {
      return {
-      number: e.number,
-      step: e.step,
+      number: el.number,
+      step: el.step,
      }
     }),
   }; 
- });
+ }); 
 
  return recipes;
 };
@@ -65,33 +67,40 @@ const getAllRecipes = async (req, res, next) => {
 };
 
 const detailDb = async (id) =>{
- const recipes = await getDbRecipes();
- const detail = recipes.filter(e => { e.id.toString() === id.toString()});
+ const detail = await Recipe.findByPk(id, {
+  include:{
+    model: Diet,
+    attributes: ['name'],
+    through: {
+     attributes: [],
+    }
+   }
+  });
 
  if(detail) return detail;
  else return "Recipe not found";
 };
 
 const detailApi = async (id) =>{
- const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`).data;
+ const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY1}`);
 
- if(recipeDetails){
+ if(recipeDetails.data){
   return {
-   id: recipeDetails.id,
-   name: recipeDetails.title,
-   image: recipeDetails.image,
-   summary: recipeDetails.summary,
-   health_score: recipeDetails.healthScore,
-   steps: recipeDetails.analyzedInstructions.steps.map((e) => {
-     return {
-       number: e.number,
-       step: e.step,
-     };
-   }),
-   diets: recipeDetails.diets,
-   dish_types: recipeDetails.dishTypes,
-   cuisines: recipeDetails.cuisines,
- };
+    id: recipeDetails.data.id,
+    name: recipeDetails.data.title,
+    image: recipeDetails.data.image,
+    summary: recipeDetails.data.summary,
+    health_score: recipeDetails.data.healthScore,
+    steps: recipeDetails.data.analyzedInstructions[0]?.steps.map((e) => {
+      return {
+        number: e.number,
+        step: e.step,
+      };
+    }),
+    diets: recipeDetails.data.diets,
+    dish_types: recipeDetails.data.dishTypes,
+    cuisines: recipeDetails.data.cuisines,
+  };
  }else{
   return 'Recipe not found';
  }
@@ -99,16 +108,15 @@ const detailApi = async (id) =>{
 
 const getRecipeDetail = async (req, res, next) => {
  try {
-  const idReceta = req.params.idReceta;
-  let detail;
+  const idReceta = req.params.idReceta;  
 
   if(idReceta.length > 6){
-   detail = detailDb(idReceta);   
+   const detailsDb = await detailDb(idReceta);
+   res.status(200).json(detailsDb);   
   }else{
-   detail = detailApi(idReceta);
+   const detailsApi = await detailApi(idReceta);
+   res.status(200).json(detailsApi); 
   }
-
-  res.status(200).send(detail);
 
  } catch (error) {
   next(error);
@@ -127,13 +135,11 @@ const createRecipe = async (req, res, next) => {
     steps
   });
 
-  let diet = await diets.map(e => {
-    Diet.findAll({
+  let diet = await Diet.findAll({
     where:{
-     name: e,
+     name: diets,
     }
-   })
-  });
+   });
   
   recipe.addDiet(diet);
 

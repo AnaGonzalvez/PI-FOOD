@@ -1,4 +1,3 @@
-const axios = require("axios");
 const { Diet } = require("../db");
 
 const dietTypes = [
@@ -26,7 +25,7 @@ const getAllDiets = async (req,res,next) => {
    })
   })
 
-  let diets = await Diet.findAll();
+  const diets = await Diet.findAll();
   res.status(200).send(diets);
   
  } catch (error) {
