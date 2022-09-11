@@ -54,7 +54,7 @@ const getAllRecipes = async (req, res, next) => {
 
   if(name){
    let recipesName = await allrecipes.filter((e) => e.name.toLowerCase().includes(name.toLowerCase()));
-   console.log(recipesName)
+   //console.log(recipesName)
    if(recipesName.length > 0){
     res.status(200).send(recipesName);
    }else{
