@@ -4,13 +4,14 @@ const { Recipe, Diet } = require("../db");
 const { API_KEY, API_KEY1, API_KEY2 } = process.env;
 
 const getApiRecipes = async () => {
- const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=2`);
+ const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY2}&addRecipeInformation=true&number=2`);
  
  const recipes = await recipesApi.data.results.map(e => {
   return {
     id: e.id,
     name: e.title,
     image: e.image,
+    diets: e.diets,
     summary: e.summary,
     health_score: e.healthScore,
     steps: e.analyzedInstructions[0]? e.analyzedInstructions[0].steps.map(el => {
@@ -49,17 +50,18 @@ const allRecipes = async () => {
 const getAllRecipes = async (req, res, next) => {
  try {
   const name = req.query.name;
-  let recipes = await allRecipes();
+  let allrecipes = await allRecipes();
 
   if(name){
-   let recipesName = await recipes.filter(e => { e.name.toLowerCase().includes(name.toLowerCase())});
+   let recipesName = await allrecipes.filter((e) => e.name.toLowerCase().includes(name.toLowerCase()));
+   console.log(recipesName)
    if(recipesName.length > 0){
     res.status(200).send(recipesName);
    }else{
     res.status(404).send('Recipe not found');
    }
   }else{
-   res.status(200).send(recipes);
+   res.status(200).send(allrecipes);
   }
 
  } catch (error) {
@@ -83,24 +85,24 @@ const detailDb = async (id) =>{
 };
 
 const detailApi = async (id) =>{
- const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY1}`);
+ const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY2}`);
 
  if(recipeDetails.data){
   return {
     id: recipeDetails.data.id,
     name: recipeDetails.data.title,
     image: recipeDetails.data.image,
+    diets: recipeDetails.data.diets,
     summary: recipeDetails.data.summary,
     health_score: recipeDetails.data.healthScore,
-    steps: e.analyzedInstructions[0]? 
-    e.analyzedInstructions[0].steps.map(el => {
+    steps: recipeDetails.data.analyzedInstructions[0]? 
+    recipeDetails.data.analyzedInstructions[0].steps.map(el => {
      return {
       number: el.number,
       step: el.step,
      }
     })
-    : 'No instructions',
-    diets: recipeDetails.data.diets,
+    : 'No instructions',    
     dish_types: recipeDetails.data.dishTypes,
     cuisines: recipeDetails.data.cuisines,
   };
