@@ -3,6 +3,7 @@ import {
   FILTER_BY_DIET,
   SORT_BY_ALPHABET,
   SORT_BY_HEALTHSCORE,
+  SEARCH_RECIPE
 } from "./actions";
 
 const initialState = {
@@ -62,6 +63,11 @@ function Reducer(state = initialState, action){
       ...state,
       recipes: sortedHealthscore
      };
+   case SEARCH_RECIPE:
+    return {
+     ...state,
+     recipes: action.payload
+    };
    default:
      return state;
  }
