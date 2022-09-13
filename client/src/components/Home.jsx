@@ -101,7 +101,7 @@ export default function Home(){
      {currentRecipes &&
        currentRecipes.map((e) => {return (
         <Link to={`/home/${e.id}`}>
-         <Card id={e.id} name={e.name} img={e.image} diet={e.diets} />
+         <Card id={e.id} name={e.name} img={e.image} /* diet={e.diet? e.diet?.map(e => e.diet) : e.diets?.map(e => e.name)} */ />
         </Link>
        )})}
    </>

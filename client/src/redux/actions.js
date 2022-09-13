@@ -4,6 +4,7 @@ export const FILTER_BY_DIET = "FILTER_BY_DIET";
 export const SORT_BY_ALPHABET = 'SORT_BY_ALPHABET';
 export const SORT_BY_HEALTHSCORE = "SORT_BY_HEALTHSCORE";
 export const SEARCH_RECIPE = 'SEARCH_RECIPE';
+export const GET_RECIPE_DETAIL = 'GET_RECIPE_DETAIL';
 
 export function getAllRecipes(){
  return async (dispatch)=>{
@@ -47,6 +48,16 @@ export function searchRecipe(name){
   let result = await axios.get(`http://localhost:3001/recipes?name=${name}`);
   return dispatch({
    type: SEARCH_RECIPE,
+   payload: result.data
+  })
+ }
+};
+
+export function getRecipeDetail(id){
+ return async (dispatch) =>{
+  let result = await axios.get(`http://localhost:3001/recipes/${id}`);
+  return dispatch({
+   type: GET_RECIPE_DETAIL,
    payload: result.data
   })
  }

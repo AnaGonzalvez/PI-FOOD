@@ -3,7 +3,8 @@ import {
   FILTER_BY_DIET,
   SORT_BY_ALPHABET,
   SORT_BY_HEALTHSCORE,
-  SEARCH_RECIPE
+  SEARCH_RECIPE,
+  GET_RECIPE_DETAIL
 } from "./actions";
 
 const initialState = {
@@ -68,6 +69,11 @@ function Reducer(state = initialState, action){
      ...state,
      recipes: action.payload
     };
+   case GET_RECIPE_DETAIL:
+    return{
+     ...state,
+     recipeDetail: action.payload
+    }
    default:
      return state;
  }
