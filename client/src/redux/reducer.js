@@ -4,7 +4,9 @@ import {
   SORT_BY_ALPHABET,
   SORT_BY_HEALTHSCORE,
   SEARCH_RECIPE,
-  GET_RECIPE_DETAIL
+  GET_RECIPE_DETAIL,
+  GET_ALL_DIETS,
+  POST_RECIPE
 } from "./actions";
 
 const initialState = {
@@ -34,7 +36,8 @@ function Reducer(state = initialState, action){
      };
    case SORT_BY_ALPHABET:
     let sortedRecipes = state.recipes;
-    sortedRecipes = action.payload === 'Asc' ? 
+    if(sortedRecipes !== 'All'){
+     sortedRecipes = action.payload === 'Asc' ? 
      state.recipes.sort((a,b) =>{
      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
      if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
@@ -44,12 +47,14 @@ function Reducer(state = initialState, action){
      if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
      return 0;
     });
+    }    
      return {
       ...state,
       recipes: sortedRecipes
      };
    case SORT_BY_HEALTHSCORE:
     let sortedHealthscore = state.recipes;
+    if(sortedHealthscore !== 'All'){
     sortedHealthscore = action.payload === 'LowToHigh'?
     state.recipes.sort((a,b) =>{
      if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
@@ -60,6 +65,7 @@ function Reducer(state = initialState, action){
      if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
      return 0;
     });
+    }
      return {
       ...state,
       recipes: sortedHealthscore
@@ -73,7 +79,16 @@ function Reducer(state = initialState, action){
     return{
      ...state,
      recipeDetail: action.payload
-    }
+    };
+   case GET_ALL_DIETS:
+    return{
+     ...state,
+     diets: action.payload
+    };
+   case POST_RECIPE:
+    return{
+     state
+    };
    default:
      return state;
  }

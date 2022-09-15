@@ -10,7 +10,7 @@ export default function SearchBar(){
 
  function handleChange(e){
   e.preventDefault();
-  setName(e.target.value);
+  setName(e.target.value);  
  };
 
  function handleSubmit(e){
@@ -21,8 +21,8 @@ export default function SearchBar(){
 
  return(
   <>
-   <input type="text" placeholder="Search..." onChange={(e) => handleChange(e)} />
-   <button type='submit' onSubmit={(e) => handleSubmit(e)}>Search</button>
+   <input type="text" placeholder="Search..." onChange={(e) => handleChange(e)} value={name} />
+   <button type='submit' onClick={(e) => handleSubmit(e)}>Search</button>
   </>
  )
 };
