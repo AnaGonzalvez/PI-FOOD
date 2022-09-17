@@ -40,6 +40,7 @@ export default function Home(){
  };
 
  function handleFilterByDiet(e) {
+  e.preventDefault();
   dispatch(filterByDiet(e.target.value));
  };
 
@@ -101,7 +102,7 @@ export default function Home(){
      {currentRecipes &&
        currentRecipes.map((e) => {return (
         <Link to={`/home/${e.id}`}>
-         <Card id={e.id} name={e.name} img={e.image} /* diet={e.diet? e.diet?.map(e => e.diet) : e.diets?.map(e => e.name)} */ />
+         <Card id={e.id} name={e.name} img={e.image} diet={e.diet? e.diet.map(e => e) : e.diets?.map(e => e.name)} />
         </Link>
        )})}
    </>

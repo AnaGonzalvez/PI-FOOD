@@ -11,6 +11,7 @@ export const GET_ALL_DIETS = 'GET_ALL_DIETS';
 export function getAllRecipes(){
  return async (dispatch)=>{
   let result = await axios.get("http://localhost:3001/recipes");
+  console.log(result)
   return dispatch({
    type: GET_ALL_RECIPES,
    payload: result.data
@@ -19,6 +20,7 @@ export function getAllRecipes(){
 };
 
 export function filterByDiet(diet){
+ console.log(diet)
  return async (dispatch) =>{
   return dispatch({
    type: FILTER_BY_DIET,

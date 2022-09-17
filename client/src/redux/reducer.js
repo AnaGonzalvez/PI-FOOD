@@ -23,13 +23,14 @@ function Reducer(state = initialState, action){
      return {
        ...state,
        recipes: action.payload,
+       recipesCopy: action.payload
      };
    case FILTER_BY_DIET:
      const allRecipes = state.recipesCopy;
-     const recipesFiltered =
-       action.payload === "All"
-         ? allRecipes
-         : allRecipes.filter((e) => e.diets === action.payload);
+     let recipesFiltered = allRecipes;
+       if(action.payload !== 'All'){
+        recipesFiltered = allRecipes.filter((e) => e.diet? e.diet?.find(e => e === action.payload) : e.diets?.find( e => e.name === action.payload));
+       } 
      return {
        ...state,
        recipes: recipesFiltered,

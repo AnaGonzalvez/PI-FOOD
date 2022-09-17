@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getRecipeDetail } from "../redux/actions";
+import { Link } from 'react-router-dom';
 
 export default function Detail(props) {
  let id = props.match.params.id;
@@ -14,16 +15,41 @@ export default function Detail(props) {
 
  return (
    <>
+     <Link to="/home">
+       <button>Go back</button>
+     </Link>
      {detail && (
        <div>
          <h3>Name: {detail.name}</h3>
          <img src={detail.image} alt="img not found" />
-         <h1>Diet: {detail.diet? detail.diet?.map(e => `${e.diet} ,`) : detail.diets?.map(e => `${e.diets.name} ,`)}</h1>
-         <h1>Summary: {detail.summary}</h1>
-         <h1>Health Score: {detail.health_score}</h1>
-         {detail.steps?.map( e => <h1>{e.number}. {e.step}</h1>)}
-         <h1>Dishtypes: {detail.dish_types}</h1>
-         <h1>Cuisines: {detail.cuisines}</h1>
+         <h4>
+           Diet:{" "}
+           {detail.diet
+             ? detail.diet.map((e) => `${e}, `)
+             : detail.diets?.map((e) => `${e.name}, `)}
+         </h4>
+         <h4>Summary: {detail.summary?.replace(/<[^>]*>/g, "")}</h4>
+         <h4>
+           Health Score: {detail.health_score ? detail.health_score : " - "}
+         </h4>
+         <h4>Steps: </h4>
+         {Array.isArray(detail.steps) ? (
+           detail.steps?.map((e) => (
+             <h5>
+               {e.number}. {e.step}
+             </h5>
+           ))
+         ) : (
+           <h5>{detail.steps}</h5>
+         )}
+         <h4>
+           Dishtypes:{" "}
+           {detail.dish_types ? detail.dish_types.map((e) => `${e}, `) : " - "}
+         </h4>
+         <h4>
+           Cuisines:{" "}
+           {detail.cuisines ? detail.cuisines.map((e) => `${e}, `) : " - "}
+         </h4>
        </div>
      )}
    </>
