@@ -7,7 +7,7 @@ const dietTypes = [
   "lacto vegetarian",
   "ovo vegetarian",
   "lacto ovo vegetarian",
-  "Vegan",
+  "vegan",
   "pescetarian",
   'paleolithic',
   "dairy free",

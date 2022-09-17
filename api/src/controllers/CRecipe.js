@@ -4,14 +4,16 @@ const { Recipe, Diet } = require("../db");
 const { API_KEY, API_KEY1, API_KEY2 } = process.env;
 
 const getApiRecipes = async () => {
- const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=50`);
+ const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=50`);
  
  const recipes = await recipesApi.data.results.map(e => {
+  let vegetarian = e.vegetarian && 'vegetarian';
+  let lowFODMAP = e.lowFodmap && 'low FODMAP';  
   return {
     id: e.id,
     name: e.title,
     image: e.image,
-    diet: e.diets.map(e => e),
+    diet: [...e.diets?.map(e => e === 'fodmap friendly'? '' : e), vegetarian, lowFODMAP],
     summary: e.summary,
     health_score: e.healthScore,
     steps: e.analyzedInstructions[0]? e.analyzedInstructions[0].steps.map(el => {
@@ -85,7 +87,7 @@ const detailDb = async (id) =>{
 };
 
 const detailApi = async (id) =>{
- const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`);
+ const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY1}`);
 
  if(recipeDetails.data){
   return {
