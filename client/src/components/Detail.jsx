@@ -13,6 +13,8 @@ export default function Detail(props) {
   dispatch(getRecipeDetail(id))
  },[dispatch, id]);
 
+ var i = 1;
+
  return (
    <>
      <Link to="/home">
@@ -40,8 +42,8 @@ export default function Detail(props) {
              </h5>
            ))
          ) : (
-           <h5>{detail.steps}</h5>
-         )}
+          detail.steps?.split('.').map(e => <h5> {i++}. {e} </h5>))
+         }           
          <h4>
            Dishtypes:{" "}
            {detail.dish_types ? detail.dish_types.map((e) => `${e}, `) : " - "}

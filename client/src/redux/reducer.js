@@ -29,7 +29,27 @@ function Reducer(state = initialState, action){
      const allRecipes = state.recipesCopy;
      let recipesFiltered = allRecipes;
        if(action.payload !== 'All'){
-        recipesFiltered = allRecipes.filter((e) => e.diet? e.diet?.find(e => e === action.payload) : e.diets?.find( e => e.name === action.payload));
+        action.payload === "lacto vegetarian"
+          ? (recipesFiltered = allRecipes.filter((e) =>
+              e.diet
+                ? e.diet?.includes("lacto ovo vegetarian")
+                  ? "lacto vegetarian"
+                  : ""
+                : e.diets?.find((e) => e.name === action.payload)
+            ))
+          : action.payload === "ovo vegetarian"
+          ? (recipesFiltered = allRecipes.filter((e) =>
+              e.diet
+                ? e.diet?.includes("lacto ovo vegetarian")
+                  ? "ovo vegetarian"
+                  : ""
+                : e.diets?.find((e) => e.name === action.payload)
+            ))
+          : (recipesFiltered = allRecipes.filter((e) =>
+              e.diet
+                ? e.diet?.includes(action.payload)
+                : e.diets?.find((e) => e.name === action.payload)
+            ));
        } 
      return {
        ...state,
@@ -58,12 +78,12 @@ function Reducer(state = initialState, action){
     if(sortedHealthscore !== 'All'){
     sortedHealthscore = action.payload === 'LowToHigh'?
     state.recipes.sort((a,b) =>{
-     if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-     if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-     return 0;
-    }) : state.recipes.sort((a,b) =>{
      if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
      if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+     return 0;
+    }) : state.recipes.sort((a,b) =>{
+     if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+     if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
      return 0;
     });
     }
