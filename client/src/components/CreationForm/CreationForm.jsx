@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllDiets, postRecipe } from "../redux/actions";
+import { getAllDiets, postRecipe } from "../../redux/actions";
 import { Link, useHistory } from 'react-router-dom';
 
 function validation(input){

@@ -6,10 +6,10 @@ import {
   getAllRecipes,
   sortByAlphabet,
   sortByHealthscore,
-} from "../redux/actions";
-import Nav from './Nav';
-import Card from './Card';
-import Pages from "./Pages";
+} from "../../redux/actions";
+import Nav from '../Nav/Nav';
+import Card from '../Card/Card';
+import Pages from "../Pages/Pages";
 import { Link } from 'react-router-dom';
 
 export default function Home(){
