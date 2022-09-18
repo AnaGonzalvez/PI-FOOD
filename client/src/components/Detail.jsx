@@ -23,7 +23,14 @@ export default function Detail(props) {
      {detail && (
        <div>
          <h3>Name: {detail.name}</h3>
-         <img src={detail.image} alt="img not found" />
+         {detail.image ? (
+           <img src={detail.image} alt="img not found" />
+         ) : (
+           <img
+             src="https://img.freepik.com/foto-gratis/tabla-cortar-madera-rodeada-platos-pasta-e-ingredientes-mesa_23-2148246798.jpg?w=2000"
+             alt="img not found"
+           />
+         )}
          <h4>
            Diet:{" "}
            {detail.diet
@@ -35,15 +42,18 @@ export default function Detail(props) {
            Health Score: {detail.health_score ? detail.health_score : " - "}
          </h4>
          <h4>Steps: </h4>
-         {Array.isArray(detail.steps) ? (
-           detail.steps?.map((e) => (
-             <h5>
-               {e.number}. {e.step}
-             </h5>
-           ))
-         ) : (
-          detail.steps?.split('.').map(e => <h5> {i++}. {e} </h5>))
-         }           
+         {Array.isArray(detail.steps)
+           ? detail.steps?.map((e) => (
+               <h5>
+                 {e.number}. {e.step}
+               </h5>
+             ))
+           : detail.steps?.split(".").map((e) => (
+               <h5>
+                 {" "}
+                 {i++}. {e}{" "}
+               </h5>
+             ))}
          <h4>
            Dishtypes:{" "}
            {detail.dish_types ? detail.dish_types.map((e) => `${e}, `) : " - "}

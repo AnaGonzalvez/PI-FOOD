@@ -84,6 +84,13 @@ export default function CreationForm() {
  }
  };
 
+ function handleDelete(e){  
+  setInput({
+   ...input,
+   diets: input.diets.filter(r => r !== e)
+  })
+ };
+
  return (
    <>
      <Link to="/home">Go back</Link>
@@ -138,10 +145,11 @@ export default function CreationForm() {
          {alldiets &&
            alldiets.map((e) => <option name={e.name}>{e.name}</option>)}
        </select>
+       <button type="submit">Submit recipe</button> 
        {error.diets? <p>{error.diets}</p> : input.diets.map((e) => (
-         <p id={e}>{`${e} `}</p>
+          <p id={e}>{`${e} `} <button onClick={() => handleDelete(e)} key={e}>x</button></p>       
        ))}
-       { Object.values(error).length? <></>  : <button type="submit">Submit recipe</button>}       
+                
      </form>
    </>
  );
