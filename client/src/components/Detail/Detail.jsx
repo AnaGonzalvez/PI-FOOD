@@ -1,7 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getRecipeDetail } from "../redux/actions";
+import { getRecipeDetail } from "../../redux/actions";
 import { Link } from 'react-router-dom';
 
 export default function Detail(props) {
