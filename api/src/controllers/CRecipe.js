@@ -1,11 +1,12 @@
-//require("dotenv").config();
+require("dotenv").config();
 const axios = require("axios");
 const { Recipe, Diet } = require("../db");
 const { API_KEY, API_KEY1, API_KEY2 } = process.env;
 
+
 const getApiRecipes = async () => {
- const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=50`);
- 
+ const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=50`);
+  
  const recipes = await recipesApi.data.results.map(e => {
   let vegetarian = e.vegetarian && 'vegetarian';
   let lowFODMAP = e.lowFodmap && 'low FODMAP';  
@@ -87,7 +88,7 @@ const detailDb = async (id) =>{
 };
 
 const detailApi = async (id) =>{
- const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY1}`);
+ const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`);
 
  if(recipeDetails.data){
   return {
@@ -107,7 +108,7 @@ const detailApi = async (id) =>{
     : 'No instructions',    
     dish_types: recipeDetails.data.dishTypes,
     cuisines: recipeDetails.data.cuisines,
-  };
+   };
  }else{
   return 'Recipe not found';
  }
