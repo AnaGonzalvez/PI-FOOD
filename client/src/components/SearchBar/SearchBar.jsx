@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchRecipe } from "../../redux/actions";
+import style from './SearchBar.module.css';
 
 export default function SearchBar(){
 
@@ -20,9 +21,9 @@ export default function SearchBar(){
  }
 
  return(
-  <>
-   <input type="text" placeholder="Search..." onChange={(e) => handleChange(e)} value={name} />
-   <button type='submit' onClick={(e) => handleSubmit(e)}>Search</button>
-  </>
+  <div className={style.container}>
+   <input type="text" placeholder="Search..." onChange={(e) => handleChange(e)} value={name} className={style.searchInput}/>
+   <button type='submit' onClick={(e) => handleSubmit(e)} className={style.btn}>Search</button>
+  </div>
  )
 };

@@ -1,0 +1,37 @@
+.container{
+ display: inline-block;
+ flex-direction: row; 
+}
+
+.searchInput{
+ position: relative;
+ box-sizing: border-box;
+ font-family: 'Kanit', sans-serif;
+ font-size: 16px;
+ border: 1px solid #F7EDE6;
+ border-radius: 20px 0 0 20px;
+ width: 200px;
+ height: 30px;
+ outline: none;
+ padding: 0 20px;
+}
+
+.btn{
+ position: relative;
+ font-family: 'Kanit', sans-serif;
+ font-size: 16px;
+ border: 1px solid #F7EDE6;
+ border-radius: 0 20px 20px 0;
+ width: 100px;
+ height: 30px; 
+ outline: none;
+ background-color: #F07928;
+ color: #603162;
+ cursor: pointer;
+}
+
+.btn:hover{
+ background-color: #F7EDE6;
+ border: 1px solid #F7EDE6;
+ color: #F07928;
+}

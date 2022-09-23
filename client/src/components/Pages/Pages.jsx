@@ -1,4 +1,5 @@
 import React from "react";
+import style from './Pages.module.css';
 
 export default function Pages( { recipesPerPage, allrecipes, page } ){
  
@@ -12,14 +13,10 @@ export default function Pages( { recipesPerPage, allrecipes, page } ){
  }
 
  return(
-  <>
-  <ul>
-   { pagenum && pagenum.map(e => 
-   <>
-    <button key={e} onClick={() => page(e)}>{e}</button>
-   </>    
-   ) }
-  </ul>
-  </>
+  <div className={style.container}>  
+   { pagenum && pagenum.map(e =>    
+    <button key={e} onClick={() => page(e)} className={style.btn}>{e}</button>     
+   ) }  
+  </div>
  )
 };

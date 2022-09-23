@@ -1,0 +1,49 @@
+.cardBox {
+ display: flex;
+ flex-direction: column;
+ width: 200px;
+ height: 310px;
+ justify-items: center;
+ align-items: initial;
+ align-content: initial;
+ box-shadow: 2px 2px 0px 0px #F07928;
+ border-radius: 25px;
+ padding: 20px;
+ margin-top: 10px;
+ margin-bottom: 10px;
+ margin-left: 10px;
+ margin-right: 10px;
+ background-color: #F7EDE6;
+}
+
+.cardName{
+  font-family: 'Kanit', sans-serif;
+  font-size: 17px;
+  opacity: 1;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-decoration: underline;
+  color: #603162;
+}
+
+.cardDietTypes{
+ display: flex;
+ flex-direction: row; 
+ flex-wrap: wrap;
+ justify-content: right;
+}
+
+.cardItem{
+ font-size: 13px;
+ font-style: normal;
+ font-family: 'Kanit', sans-serif;
+ padding: 6px;
+ color: #603162;
+}
+
+.cardImage{
+ display: flex;
+ border-radius: 10px;
+ width: 200px;
+ box-shadow: 1px 3px 5px 0px grey;
+}
