@@ -69,20 +69,20 @@ export default function Home(){
        </button>
 
        <div className={style.sort}>
-         <label>Sort by:</label>
+         <label className={style.label2}>Sort by:</label>
          <div>
-           <label>Alphabetic:</label>
+           <label className={style.label}>Alphabetic</label>
            <select
              onClick={(e) => handleSortByAlphabet(e)}
              className={style.select}
            >
              <option value="All">Choose</option>
              <option value="Asc">A-Z</option>
-             <option value="Desc">Z-A</option>
+             <option value="Desc">Z-A</option>             
            </select>
          </div>
          <div>
-           <label>Health Score</label>
+           <label className={style.label}>Health Score</label>
            <select
              onClick={(e) => handleSortByHealthscore(e)}
              className={style.select}
@@ -95,9 +95,9 @@ export default function Home(){
        </div>
 
        <div className={style.filter}>
-         <label>Filter by:</label>
+         <label className={style.label2}>Filter by:</label>
          <div>
-           <label>Diet type</label>
+           <label className={style.label}>Diet type</label>
            <select
              onClick={(e) => handleFilterByDiet(e)}
              className={style.select}

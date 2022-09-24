@@ -14,9 +14,9 @@
  position: relative;
  font-family: 'Kanit', sans-serif;
  font-size: 16px;
- border: 1px solid #6EC388;
+ border: 1px solid #F7EDE6;
  border-radius: 8px;
- background: #0D8C55;
+ background: #F07928;
  color: #FEF2E8;
  outline: none;
  cursor: pointer;
@@ -27,6 +27,13 @@
 }
 
 .btn:hover{
- background-color: #F07928;
- color: #F7EDE6;
+ background-color:#F7EDE6 ;
+ color: #F07928;
+}
+
+.btn:focus{
+ outline: none;
+ background: #FEF2E8;
+ color: #F07928;
+ box-shadow: 1px 3px 5px 0px grey;
 }

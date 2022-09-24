@@ -25,9 +25,9 @@
  position: relative;
  font-family: 'Kanit', sans-serif;
  font-size: 16px;
- border: 1px solid #6EC388;
+ border: 1px solid #F7EDE6;
  border-radius: 10px;
- background: #0D8C55;
+ background: #F07928;
  color: #FEF2E8;
  width: 150px;
  height: 30px; 
@@ -37,8 +37,9 @@
 
 .btnRefresh:hover{
  background: #FEF2E8;
- color: #0D8C55;
+ color: #F07928;
 }
+
 
 .container2{
  display: flex;
@@ -51,16 +52,60 @@
 .sort{
  font-family: 'Kanit', sans-serif;
  font-size: 16px;
+ border: 1px solid #37265F;
+ border-radius: 5px;
+ margin-left: 800px;
+ margin-right: 10px;
+ background: #603162;
+ color: white;
+ width: 250px;
+ box-shadow: 1px 3px 5px 0px grey;
 }
 
 .filter{
  font-family: 'Kanit', sans-serif;
  font-size: 16px;
+ border: 1px solid #37265F;
+ border-radius: 10px;
+ background: #603162;
+ color: white;
+ margin-right: 10px;
+ width: 250px;
+ box-shadow: 1px 3px 5px 0px grey;
 }
 
 .select{
  font-family: 'Kanit', sans-serif;
  font-size: 16px;
+ border: 1px solid grey;
+ border-radius: 10px;
+ margin-bottom: 2px;
+ cursor: pointer; 
+}
+
+.select:focus{
+ outline: none;
+ color:black;
+ background: lightgray;
+}
+
+
+.select option{
+ border: 1px solid #37265F;
+ border-radius: 5px;
+ outline: none;
+ background: white;
+}
+
+
+.label{
+ margin-right: 5px;
+ margin-left: 5px;
+}
+
+.label2{
+ margin-left: 3px;
+ text-decoration: underline;
 }
 
 .paged{
