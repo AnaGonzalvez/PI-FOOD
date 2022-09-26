@@ -1,43 +1,133 @@
 .container{
-
+ position: relative;
+ display: flex;
+ flex-direction: column;
+ align-items: flex-start;
+ justify-content: space-around;
+ align-self: center;
+ font-family: 'Kanit', sans-serif;
+ background-color: #8FB6E1;
+ width: 1536px;
+ height: 953px;
 }
 
 .btn{
+ position: absolute;
+ font-family: 'Kanit', sans-serif;
+ font-size: 16px;
+ border: 1px solid #F7EDE6;
+ border-radius: 10px;
+ background: #4182EF;
+ color: #FEF2E8;
+ width: 150px;
+ height: 30px; 
+ outline: none;
+ cursor: pointer;
+ box-shadow: 1px 3px 5px 0px grey;
+ left: 10px;
+ top: 20px
+}
 
+.btn:hover{
+ background: #FEF2E8;
+ color: #4182EF;
+}
+
+.container2{
+ display: flex;
+ flex-direction: column;
+ position: absolute;
+ border: 1px solid white;
+ border-radius: 10px;
+ padding: 10px;
+ background-color: #E93D2A;
+ top: 60px;
+ left: 300px;
+ right: 700px;
+}
+
+.circle{
+ width: 350px;
+ height: 280px;
+ border-radius: 1%;
+ background-color: #E66C4F;
+ position: absolute;
+ left: 700px;
+ top: -40px;
+ box-shadow: 1px 3px 5px 0px grey;
+}
+
+.circle3{
+ width: 350px;
+ height: 280px;
+ border-radius: 5%;
+ rotate: 95deg;
+ background-color: #E66C4F;
+ position: absolute;
+ left: 750px;
+ top: 150px;
+ box-shadow: 1px 3px 5px 0px grey;
 }
 
 .name{
-
+ font-size: 18px;
+ font-weight: 10px;
+ color: white;
 }
 
 .img{
-
+ display: flex;
+ position: absolute;
+ right: -460px;
+ top: 30px;
+ margin: 0;
+ padding: 0;
+ width: 400px;
+ height: 300px;
+ border: 1px solid #3C5542;
+ border-radius: 300px;
+ box-shadow: 1px 3px 5px 0px grey;
+ rotate: 20deg;
 }
 
 .diet{
-
+ font-size: 15px;
+ font-weight: 10px;
+ color: white;
 }
 
 .summary{
-
+ font-size: 15px;
+ font-weight: 10px;
+ color: white;
 }
 
 .health_score{
-
+ font-size: 15px;
+ font-weight: 10px;
+ color: white
 }
 
 .steps{
-
+ font-size: 15px;
+ font-weight: 10px;
+ color: white
 }
 
 .step{
-
+ font-size: 12px;
+ font-weight: 10px;
+ color: white
 }
 
 .dish{
-
+ font-size: 15px;
+ font-weight: 10px;
+ color: white
 }
 
 .cuisine{
- 
+ font-size: 15px;
+ font-weight: 10px;
+ color: white
 }

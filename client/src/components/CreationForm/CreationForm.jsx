@@ -94,7 +94,7 @@ export default function CreationForm() {
  return (
    <>
      <Link to="/home">Go back</Link>
-     <h2>¡Compartí tu receta favorita!</h2>
+     <h2>¡Share your favourite recipe!</h2>
      <form onSubmit={(e) => handleSubmit(e)}>
        <label>Name:</label>
        <input

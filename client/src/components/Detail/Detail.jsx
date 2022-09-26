@@ -21,53 +21,69 @@ export default function Detail(props) {
      <Link to="/home">
        <button className={style.btn}>Go back</button>
      </Link>
-     {detail && (
-       <div>
-         <h3 className={style.name}>Name: {detail.name}</h3>
-         {detail.image ? (
-           <img src={detail.image} alt="img not found" className={style.img} />
-         ) : (
-           <img
-             src="https://img.freepik.com/foto-gratis/tabla-cortar-madera-rodeada-platos-pasta-e-ingredientes-mesa_23-2148246798.jpg?w=2000"
-             alt="img not found"
-             className={style.img}
-           />
-         )}
-         <h4 className={style.diet}>
-           Diet:{" "}
-           {detail.diet
-             ? detail.diet.map((e) => `${e}, `)
-             : detail.diets?.map((e) => `${e.name}, `)}
-         </h4>
-         <h4 className={style.summary}>
-           Summary: {detail.summary?.replace(/<[^>]*>/g, "")}
-         </h4>
-         <h4 className={style.health_score}>
-           Health Score: {detail.health_score ? detail.health_score : " - "}
-         </h4>
-         <h4 className={style.steps}>Steps: </h4>
-         {Array.isArray(detail.steps)
-           ? detail.steps?.map((e) => (
-               <h5 className={style.step}>
-                 {e.number}. {e.step}
-               </h5>
-             ))
-           : detail.steps?.split(".").map((e) => (
-               <h5 className={style.step}>
-                 {" "}
-                 {i++}. {e}{" "}
-               </h5>
-             ))}
-         <h4 className={style.dish}>
-           Dishtypes:{" "}
-           {detail.dish_types ? detail.dish_types.map((e) => `${e}, `) : " - "}
-         </h4>
-         <h4 className={style.cuisine}>
-           Cuisines:{" "}
-           {detail.cuisines ? detail.cuisines.map((e) => `${e}, `) : " - "}
-         </h4>
-       </div>
-     )}
+     <div className={style.container2}>
+       {detail && (
+         <div>
+           <span className={style.name}>Name: {detail.name}</span>
+           <div className={style.circle}></div>
+           <div className={style.circle3}></div>
+           {detail.image ? (
+             <img
+               src={detail.image}
+               alt="img not found"
+               className={style.img}
+             />
+           ) : (
+             <img
+               src="https://img.freepik.com/foto-gratis/tabla-cortar-madera-rodeada-platos-pasta-e-ingredientes-mesa_23-2148246798.jpg?w=2000"
+               alt="img not found"
+               className={style.img}
+             />
+           )}
+           <p></p>
+           <div className={style.diet}>
+             Diet:{" "}
+             {detail.diet
+               ? detail.diet.map((e) => `${e}, `)
+               : detail.diets?.map((e) => `${e.name}, `)}
+           </div>
+           <p></p>
+           <div className={style.summary}>
+             Summary: {detail.summary?.replace(/<[^>]*>/g, "")}
+           </div>
+           <p></p>
+           <div className={style.health_score}>
+             Health Score: {detail.health_score ? detail.health_score : " - "}
+           </div>
+           <p></p>
+           <div className={style.steps}>Steps: </div>
+           {Array.isArray(detail.steps)
+             ? detail.steps?.map((e) => (
+                 <div className={style.step}>
+                   {e.number}. {e.step}
+                 </div>
+               ))
+             : detail.steps?.split(".").map((e) => (
+                 <div className={style.step}>
+                   {" "}
+                   {i++}. {e}{" "}
+                 </div>
+               ))}
+           <p></p>
+           <div className={style.dish}>
+             Dishtypes:{" "}
+             {detail.dish_types
+               ? detail.dish_types.map((e) => `${e}, `)
+               : " - "}
+           </div>
+           <p></p>
+           <div className={style.cuisine}>
+             Cuisines:{" "}
+             {detail.cuisines ? detail.cuisines.map((e) => `${e}, `) : " - "}
+           </div>
+         </div>
+       )}
+     </div>
    </div>
  );
 };
