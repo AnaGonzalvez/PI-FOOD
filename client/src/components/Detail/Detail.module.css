@@ -5,10 +5,9 @@
  align-items: flex-start;
  justify-content: space-around;
  align-self: center;
- font-family: 'Kanit', sans-serif;
- background-color: #8FB6E1;
- width: 1536px;
- height: 953px;
+ font-family: 'Kanit', sans-serif; 
+ background-color: #FEF2E8;
+ height: 100vmax;
 }
 
 .btn{
@@ -17,7 +16,7 @@
  font-size: 16px;
  border: 1px solid #F7EDE6;
  border-radius: 10px;
- background: #4182EF;
+ background: #603162;
  color: #FEF2E8;
  width: 150px;
  height: 30px; 
@@ -30,7 +29,7 @@
 
 .btn:hover{
  background: #FEF2E8;
- color: #4182EF;
+ color: #603162;
 }
 
 .container2{
@@ -40,7 +39,7 @@
  border: 1px solid white;
  border-radius: 10px;
  padding: 10px;
- background-color: #E93D2A;
+ background-color: #9570A7;
  top: 60px;
  left: 300px;
  right: 700px;
@@ -50,7 +49,7 @@
  width: 350px;
  height: 280px;
  border-radius: 1%;
- background-color: #E66C4F;
+ background-color: #9570A7;
  position: absolute;
  left: 700px;
  top: -40px;
@@ -62,7 +61,7 @@
  height: 280px;
  border-radius: 5%;
  rotate: 95deg;
- background-color: #E66C4F;
+ background-color: #9570A7;
  position: absolute;
  left: 750px;
  top: 150px;
@@ -73,6 +72,7 @@
  font-size: 18px;
  font-weight: 10px;
  color: white;
+ text-decoration: underline;
 }
 
 .img{
@@ -92,42 +92,44 @@
 
 .diet{
  font-size: 15px;
- font-weight: 10px;
  color: white;
 }
 
 .summary{
- font-size: 15px;
- font-weight: 10px;
+ font-size: 13px;
  color: white;
+ margin-left: 10px;
 }
 
 .health_score{
  font-size: 15px;
- font-weight: 10px;
  color: white
 }
 
 .steps{
  font-size: 15px;
- font-weight: 10px;
  color: white
 }
 
 .step{
- font-size: 12px;
- font-weight: 10px;
- color: white
+ font-size: 13px;
+ color: white;
+ margin-left: 10px;
 }
 
 .dish{
  font-size: 15px;
- font-weight: 10px;
  color: white
 }
 
 .cuisine{
  font-size: 15px;
- font-weight: 10px;
  color: white
+}
+
+.item{
+ display: flex;
+ position: relative;
+ margin-left: 10px;
+ font-size: 13px;
 }

@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllDiets, postRecipe } from "../../redux/actions";
 import { Link, useHistory } from 'react-router-dom';
+import style from './CreationForm.module.css';
+import imageFondo from '../../images/utensillos cocina - Editada.png';
 
 function validation(input){
  let error = {};
@@ -53,16 +55,20 @@ export default function CreationForm() {
 
  function handleSelect(e){
   e.preventDefault();
-  setInput({
-   ...input,
-   diets: [...input.diets, e.target.value]
-  });
-  setError(
-    validation({
+  if(input.diets.filter((d) => d === e.target.value).length === 0){
+   setInput({
       ...input,
-      diets: [...input.diets, e.target.value],
-    })
-  );
+      diets: [...input.diets, e.target.value]
+     });
+     setError(
+       validation({
+         ...input,
+         diets: [...input.diets, e.target.value],
+       })
+     );
+  } else {
+   alert('Diet type already selected');
+  } 
  };
 
  function handleSubmit(e){
@@ -92,66 +98,92 @@ export default function CreationForm() {
  };
 
  return (
-   <>
-     <Link to="/home">Go back</Link>
-     <h2>¡Share your favourite recipe!</h2>
-     <form onSubmit={(e) => handleSubmit(e)}>
-       <label>Name:</label>
-       <input
-         type="text"
-         placeholder="name"
-         name="name"
-         value={input.name}
-         onChange={(e) => handleChange(e)}
-       />
-       {error.name && <p>{error.name}</p>}
-       <label>Image:</label>
-       <input
-         type="text"
-         placeholder="image"
-         name="image"
-         value={input.image}
-         onChange={(e) => handleChange(e)}
-       />
-       <label>Summary:</label>
-       <input
-         type="text"
-         placeholder="summary"
-         name="summary"
-         value={input.summary}
-         onChange={(e) => handleChange(e)}
-       />
-       {error.summary && <p>{error.summary}</p>}
-       <label>Health Score:</label>
-       <input
-         type="number"
-         placeholder="health score"
-         name="health_score"
-         value={input.health_score}
-         onChange={(e) => handleChange(e)}
-       />
-       {error.health_score && <p>{error.health_score}</p>}
-       <label>Steps:</label>
-       <input
-         type="text"
-         placeholder="steps"
-         name="steps"
-         value={input.steps}
-         onChange={(e) => handleChange(e)}
-       />
-       {error.steps && <p>{error.steps}</p>}
-       <label>Diets:</label>
-       <select onChange={(e) => handleSelect(e)}>
-         {alldiets &&
-           alldiets.map((e) => <option name={e.name}>{e.name}</option>)}
-       </select>
-       <button type="submit">Submit recipe</button> 
-       {error.diets? <p>{error.diets}</p> : input.diets.map((e) => (
-          <p id={e}>{`${e} `} <button onClick={() => handleDelete(e)} key={e}>x</button></p>       
-       ))}
-                
-     </form>
-   </>
+   <div className={style.container}>
+     <Link to="/home">
+       <button className={style.btn}>Go back</button>
+     </Link>
+       <h2 className={style.title}>¡Share your favourite recipe!</h2>
+       {/* <img src={imageFondo} alt="img not found" className={style.img}/> */}
+       <form onSubmit={(e) => handleSubmit(e)} className={style.form}>
+         <label className={style.label}>Name:</label>
+         <input
+           type="text"
+           placeholder="name"
+           name="name"
+           value={input.name}
+           onChange={(e) => handleChange(e)}
+           className={style.input}
+         />
+         {error.name && <p className={style.error}>{error.name}</p>}
+         <label className={style.label}>Image:</label>
+         <input
+           type="text"
+           placeholder="image"
+           name="image"
+           value={input.image}
+           onChange={(e) => handleChange(e)}
+           className={style.input}
+         />
+         <label className={style.label}>Summary:</label>
+         <input
+           type="text"
+           placeholder="summary"
+           name="summary"
+           value={input.summary}
+           onChange={(e) => handleChange(e)}
+           className={style.input}
+         />
+         {error.summary && <p className={style.error}>{error.summary}</p>}
+         <label className={style.label}>Health Score:</label>
+         <input
+           type="number"
+           placeholder="health score"
+           name="health_score"
+           value={input.health_score}
+           onChange={(e) => handleChange(e)}
+           className={style.input}
+         />
+         {error.health_score && (
+           <p className={style.error}>{error.health_score}</p>
+         )}
+         <label className={style.label}>Steps:</label>
+         <input
+           type="text"
+           placeholder="steps"
+           name="steps"
+           value={input.steps}
+           onChange={(e) => handleChange(e)}
+           className={style.input}
+         />
+         {error.steps && <p className={style.error}>{error.steps}</p>}
+         <label className={style.label}>Diets:</label>
+         <select onChange={(e) => handleSelect(e)} className={style.select}>
+           {alldiets &&
+             alldiets.map((e) => <option name={e.name}>{e.name}</option>)}
+         </select>
+
+         {error.diets ? (
+           <p className={style.error}>{error.diets}</p>
+         ) : (
+           input.diets.map((e) => (
+             <p id={e} className={style.diets}>
+               {`${e} `}{" "}
+               <button
+                 onClick={() => handleDelete(e)}
+                 key={e}
+                 className={style.btn3}
+               >
+                 x
+               </button>
+             </p>
+           ))
+         )}
+         <button type="submit" className={style.btn2}>
+           Submit recipe
+         </button>
+       </form>
+    
+   </div>
  );
 
 };

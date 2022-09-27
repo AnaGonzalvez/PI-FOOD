@@ -24,7 +24,7 @@ export default function Detail(props) {
      <div className={style.container2}>
        {detail && (
          <div>
-           <span className={style.name}>Name: {detail.name}</span>
+           <span className={style.name}>{detail.name}</span>
            <div className={style.circle}></div>
            <div className={style.circle3}></div>
            {detail.image ? (
@@ -44,12 +44,17 @@ export default function Detail(props) {
            <div className={style.diet}>
              Diet:{" "}
              {detail.diet
-               ? detail.diet.map((e) => `${e}, `)
-               : detail.diets?.map((e) => `${e.name}, `)}
+               ? detail.diet.map((e) => (
+                   <li className={style.item}>{`${e}`}</li>
+                 ))
+               : detail.diets?.map((e) => (
+                   <li className={style.item}>{`${e.name}`}</li>
+                 ))}
            </div>
            <p></p>
+           <div className={style.steps}>Summary:</div>
            <div className={style.summary}>
-             Summary: {detail.summary?.replace(/<[^>]*>/g, "")}
+             {detail.summary?.replace(/<[^>]*>/g, "")}
            </div>
            <p></p>
            <div className={style.health_score}>
@@ -58,28 +63,42 @@ export default function Detail(props) {
            <p></p>
            <div className={style.steps}>Steps: </div>
            {Array.isArray(detail.steps)
-             ? detail.steps?.map((e) => (
-                 <div className={style.step}>
-                   {e.number}. {e.step}
-                 </div>
-               ))
-             : detail.steps?.split(".").map((e) => (
-                 <div className={style.step}>
-                   {" "}
-                   {i++}. {e}{" "}
-                 </div>
-               ))}
+             ? detail.steps?.map((e) =>
+                 e === "No instructions" ? (
+                   <div className={style.step}>{e}</div>
+                 ) : (
+                   <div className={style.step}>
+                     {e.number}. {e.step}
+                   </div>
+                 )
+               )
+             : detail.steps?.split(".").map((e) =>
+                 e === "No instructions" ? (
+                   <div className={style.step}>{e}</div>
+                 ) : (
+                   <div className={style.step}>
+                     {" "}
+                     {i++}. {e}{" "}
+                   </div>
+                 )
+               )}
            <p></p>
            <div className={style.dish}>
              Dishtypes:{" "}
              {detail.dish_types
-               ? detail.dish_types.map((e) => `${e}, `)
+               ? detail.dish_types.map((e) => (
+                   e? <li className={style.item}>{`${e}`}</li> : ' - '
+                 ))
                : " - "}
            </div>
            <p></p>
            <div className={style.cuisine}>
              Cuisines:{" "}
-             {detail.cuisines ? detail.cuisines.map((e) => `${e}, `) : " - "}
+             {detail.cuisines
+               ? detail.cuisines.map((e) => (
+                   e? <li className={style.item}>{`${e}`}</li> : ' - '
+                 ))
+               : " - "}
            </div>
          </div>
        )}

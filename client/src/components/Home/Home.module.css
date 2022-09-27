@@ -28,6 +28,7 @@
  border: 1px solid #F7EDE6;
  border-radius: 10px;
  background: #F07928;
+ box-shadow: 1px 3px 5px 0px grey;
  color: #FEF2E8;
  width: 150px;
  height: 30px; 
@@ -36,7 +37,7 @@
 }
 
 .btnRefresh:hover{
- background: #FEF2E8;
+ background: white;
  color: #F07928;
 }
 
