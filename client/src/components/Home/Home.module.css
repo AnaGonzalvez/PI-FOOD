@@ -41,6 +41,11 @@
  color: #F07928;
 }
 
+.container{
+ background-color: #FEF2E8;
+ padding-bottom: 125px;
+ height: max-content;
+}
 
 .container2{
  display: flex;

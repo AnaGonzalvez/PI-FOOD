@@ -60,7 +60,7 @@ export default function Home(){
  };
 
  return (
-   <>
+   <div className={style.container}>
      <Nav />
 
      <div className={style.container2}>
@@ -142,7 +142,7 @@ export default function Home(){
            </Link>
          ))}{" "}
      </div>
-   </>
+   </div>
  );
 
 };
