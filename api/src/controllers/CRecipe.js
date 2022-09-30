@@ -5,7 +5,7 @@ const { API_KEY, API_KEY1, API_KEY2 } = process.env;
 
 
 const getApiRecipes = async () => {
- const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=50`);
+ const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
   
  const recipes = await recipesApi.data.results.map(e => {
   let vegetarian = e.vegetarian && 'vegetarian';
@@ -59,12 +59,12 @@ const getAllRecipes = async (req, res, next) => {
    let recipesName = await allrecipes.filter((e) => e.name.toLowerCase().includes(name.toLowerCase()));
    
    if(recipesName.length > 0){
-    res.status(200).send(recipesName);
+    return res.status(200).send(recipesName);
    }else{
-    res.status(404).send('Recipe not found');
+    return res.status(404).send('Recipe not found');
    }
   }else{
-   res.status(200).send(allrecipes);
+   return res.status(200).send(allrecipes);
   }
 
  } catch (error) {
@@ -116,14 +116,14 @@ const detailApi = async (id) =>{
 
 const getRecipeDetail = async (req, res, next) => {
  try {
-  const idReceta = req.params.idReceta;  
+  const id = req.params.id;  
 
-  if(idReceta.length > 6){
-   const detailsDb = await detailDb(idReceta);
-   res.status(200).json(detailsDb);   
+  if(id.length > 6){
+   const detailsDb = await detailDb(id);
+   return res.status(200).json(detailsDb);   
   }else{
-   const detailsApi = await detailApi(idReceta);
-   res.status(200).json(detailsApi); 
+   const detailsApi = await detailApi(id);
+   return res.status(200).json(detailsApi); 
   }
 
  } catch (error) {
@@ -135,6 +135,8 @@ const createRecipe = async (req, res, next) => {
  try {
   const { name, image, summary, health_score, steps, diets } = req.body;
 
+  if(!name || !summary || !health_score || !steps || !diets) return res.status(404).send('Invalid inputs')
+  
   let recipe = await Recipe.create({
     name,
     image,
@@ -151,7 +153,7 @@ const createRecipe = async (req, res, next) => {
   
   recipe.addDiet(diet);
 
-  res.status(200).send('Recipe created successfully');
+  return res.status(200).send('Recipe created successfully');
   
  } catch (error) {
   next(error);

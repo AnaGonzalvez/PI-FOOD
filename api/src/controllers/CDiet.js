@@ -1,7 +1,7 @@
 const { Diet } = require("../db");
 
 const dietTypes = [
-  "gluten Free",
+  "gluten free",
   "ketogenic",
   "vegetarian",
   "lacto vegetarian",
@@ -28,7 +28,7 @@ const getAllDiets = async (req,res,next) => {
   })
 
   const diets = await Diet.findAll();
-  res.status(200).send(diets);
+  return res.status(200).send(diets);
   
  } catch (error) {
   next(error);
