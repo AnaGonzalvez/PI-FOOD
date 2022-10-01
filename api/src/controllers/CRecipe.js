@@ -5,7 +5,7 @@ const { API_KEY, API_KEY1, API_KEY2 } = process.env;
 
 
 const getApiRecipes = async () => {
- const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`);
+ const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=10`);
   
  const recipes = await recipesApi.data.results.map(e => {
   let vegetarian = e.vegetarian && 'vegetarian';
@@ -88,7 +88,7 @@ const detailDb = async (id) =>{
 };
 
 const detailApi = async (id) =>{
- const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY}`);
+ const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY1}`);
 
  if(recipeDetails.data){
   return {
@@ -137,6 +137,14 @@ const createRecipe = async (req, res, next) => {
 
   if(!name || !summary || !health_score || !steps || !diets) return res.status(404).send('Invalid inputs')
   
+  let recipeData = await Recipe.findAll({
+   where: {
+    name: name
+   }
+  });
+
+  if(recipeData.length > 0) return res.status(404).send('Recipe already in DB');
+
   let recipe = await Recipe.create({
     name,
     image,
