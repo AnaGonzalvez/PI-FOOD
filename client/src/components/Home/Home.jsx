@@ -20,19 +20,20 @@ export default function Home(){
  const [currentPage, setcurrentPage] = useState(1);
  const [recipesPerPage, setrecipesPerPage] = useState(9);
  const [order, setOrder] = useState('');
+ const [filter, setFilter] = useState('');
+ const [data, setData] = useState('');
+ const [data2, setData2] = useState("");
 
  const lastRecipe = currentPage * recipesPerPage; //9 - 18 
  const firstRecipe = lastRecipe - recipesPerPage; //0 - 9
  const currentRecipes = allrecipes.slice(firstRecipe,lastRecipe);
  
- const page = (pagenum) =>{
-  setcurrentPage(pagenum);
- };
-
 
  useEffect(()=>{
+  if(allrecipes.length === 0){
    dispatch(getAllRecipes());
- },[dispatch]);
+  }   
+ },[dispatch, allrecipes]);
 
 
  function handleClick(e){
@@ -43,6 +44,7 @@ export default function Home(){
  function handleFilterByDiet(e) {
   e.preventDefault();
   dispatch(filterByDiet(e.target.value));
+  setFilter(e.target.value);
  };
 
  function handleSortByAlphabet(e){
@@ -50,6 +52,7 @@ export default function Home(){
   dispatch(sortByAlphabet(e.target.value));
   setcurrentPage(1);
   setOrder(`Ordenado ${e.target.value}`);
+  setData(e.target.value);
  };
 
  function handleSortByHealthscore(e){
@@ -57,6 +60,7 @@ export default function Home(){
   dispatch(sortByHealthscore(e.target.value));
   setcurrentPage(1);
   setOrder(`Ordenado ${e.target.value}`);
+  setData2(e.target.value);
  };
 
  return (
@@ -81,6 +85,7 @@ export default function Home(){
              <option value="Asc">A-Z</option>
              <option value="Desc">Z-A</option>
            </select>
+           {/* <p>{data}</p> */}
          </div>
          <div>
            <label className={style.label}>Health Score</label>
@@ -89,12 +94,11 @@ export default function Home(){
              onClick={(e) => handleSortByHealthscore(e)}
              className={style.select}
            >
-             <option disabled selected>
-               Choose
-             </option>
+             <option disabled selected>Choose</option>
              <option value="LowToHigh">Low to High</option>
              <option value="HighToLow">High to Low</option>
            </select>
+           {/* <p>{data2}</p> */}
          </div>
        </div>
 
@@ -121,6 +125,7 @@ export default function Home(){
              <option value="low FODMAP">low FODMAP</option>
              <option value="whole 30">whole 30</option>
            </select>
+           {/* <p>{filter}</p> */}
          </div>
        </div>
      </div>
@@ -129,7 +134,7 @@ export default function Home(){
        currentPage={currentPage}
        recipesPerPage={recipesPerPage}
        allrecipes={allrecipes.length}
-       page={page}
+       setcurrentPage={setcurrentPage}
        className={style.paged}
      />
 

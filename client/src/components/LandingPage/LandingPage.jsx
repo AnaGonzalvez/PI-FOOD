@@ -27,7 +27,7 @@ export default function LandingPage() {
       />
       <h1 className={style.title}>¡Welcome to RecipesApp!</h1>
       <h3 className={style.subtitle}>
-        Here you'll find lot of recipes to put some flavours to your food...
+        Here you will find lot of recipes to put some flavours to your food...
       </h3>
       <Link to="/home">
         <button className={style.btn}>Start</button>
