@@ -93,7 +93,7 @@ export function getAllDiets(){
 export function postRecipe(recipe){
  return async ()=>{
   try {
-   let result = await axios.post("http://localhost:3001/recipes/", recipe);
+   await axios.post("http://localhost:3001/recipes/", recipe);
    return alert("Recipe created successfully");
   } catch (error) {
    return alert('Recipe already created');
