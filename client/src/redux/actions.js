@@ -9,18 +9,21 @@ export const POST_RECIPE = 'POST_RECIPE';
 export const GET_ALL_DIETS = 'GET_ALL_DIETS';
 
 export function getAllRecipes(){
- return async (dispatch)=>{
+ return async (dispatch)=>{  
+  try {
   let result = await axios.get("http://localhost:3001/recipes");
-  console.log(result)
   return dispatch({
    type: GET_ALL_RECIPES,
    payload: result.data
   })
+  } catch (error) {
+   return alert('Recipe not found');
+  }
+  
  }
 };
 
 export function filterByDiet(diet){
- console.log(diet)
  return async (dispatch) =>{
   return dispatch({
    type: FILTER_BY_DIET,
@@ -49,21 +52,31 @@ export function sortByHealthscore(healthScore){
 
 export function searchRecipe(name){ 
  return async (dispatch) =>{
-  let result = await axios.get(`http://localhost:3001/recipes?name=${name}`);
+  try {
+  let result = await axios.get(`http://localhost:3001/recipes?name=${name}`);      
   return dispatch({
    type: SEARCH_RECIPE,
    payload: result.data
-  })
+  }) 
+  } catch (error) {
+   return alert('Recipe not found');
+  }
+   
  }
 };
 
 export function getRecipeDetail(id){
  return async (dispatch) =>{
-  let result = await axios.get(`http://localhost:3001/recipes/${id}`);
-  return dispatch({
-   type: GET_RECIPE_DETAIL,
-   payload: result.data
-  })
+  try {
+   let result = await axios.get(`http://localhost:3001/recipes/${id}`);
+   return dispatch({
+    type: GET_RECIPE_DETAIL,
+    payload: result.data
+   }) 
+  } catch (error) {
+   return alert('Recipe not found');
+  }
+
  }
 };
 
@@ -79,7 +92,11 @@ export function getAllDiets(){
 
 export function postRecipe(recipe){
  return async ()=>{
-  let result = await axios.post("http://localhost:3001/recipes/", recipe);
-  return result;
+  try {
+   let result = await axios.post("http://localhost:3001/recipes/", recipe);
+   return alert("Recipe created successfully");
+  } catch (error) {
+   return alert('Recipe already created');
+  }  
  }
 };

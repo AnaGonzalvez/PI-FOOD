@@ -38,3 +38,32 @@
  color: #F07928;
  box-shadow: 1px 3px 5px 0px grey;
 }
+
+.btn2{
+ position: relative;
+ font-family: 'Kanit', sans-serif;
+ font-size: 16px;
+ border: 1px solid #F7EDE6;
+ border-radius: 8px;
+ background: #F07928;
+ color: #FEF2E8;
+ outline: none;
+ cursor: pointer;
+ width: 45px;
+ height: 30px;
+ margin-left: 5px;
+ margin-right: 5px;
+}
+
+.btn2:hover{
+ background-color:white ;
+ color: #F07928; 
+ box-shadow: 1px 3px 5px 0px grey;
+}
+
+.btn2:focus{
+ outline: none;
+ background: white;
+ color: #F07928;
+ box-shadow: 1px 3px 5px 0px grey;
+}

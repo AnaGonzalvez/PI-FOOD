@@ -31,7 +31,7 @@ export default function Home(){
 
 
  useEffect(()=>{
-  dispatch(getAllRecipes());
+   dispatch(getAllRecipes());
  },[dispatch]);
 
 
@@ -73,21 +73,25 @@ export default function Home(){
          <div>
            <label className={style.label}>Alphabetic</label>
            <select
+             name="alphabetic"
              onClick={(e) => handleSortByAlphabet(e)}
              className={style.select}
            >
-             <option value="All">Choose</option>
+             <option disabled selected>Choose</option>
              <option value="Asc">A-Z</option>
-             <option value="Desc">Z-A</option>             
+             <option value="Desc">Z-A</option>
            </select>
          </div>
          <div>
            <label className={style.label}>Health Score</label>
            <select
+             name="health_score"
              onClick={(e) => handleSortByHealthscore(e)}
              className={style.select}
            >
-             <option value="All">Choose</option>
+             <option disabled selected>
+               Choose
+             </option>
              <option value="LowToHigh">Low to High</option>
              <option value="HighToLow">High to Low</option>
            </select>
@@ -99,10 +103,11 @@ export default function Home(){
          <div>
            <label className={style.label}>Diet type</label>
            <select
+             name="diet"
              onClick={(e) => handleFilterByDiet(e)}
              className={style.select}
            >
-             <option value="All">Choose</option>
+             <option disabled selected>Choose</option>
              <option value="gluten free">gluten free</option>
              <option value="ketogenic">ketogenic</option>
              <option value="vegetarian">vegetarian</option>
@@ -121,6 +126,7 @@ export default function Home(){
      </div>
 
      <Pages
+       currentPage={currentPage}
        recipesPerPage={recipesPerPage}
        allrecipes={allrecipes.length}
        page={page}
@@ -128,11 +134,11 @@ export default function Home(){
      />
 
      <div className={style.cards}>
-       {currentRecipes &&
+       {currentRecipes && 
          currentRecipes.map((e) => (
-           <Link to={`/home/${e.id}`} className={style.cardLink}>
+           <Link to={`/home/${e.id}`} className={style.cardLink} key={e.id}>
              <Card
-               id={e.id}
+               key={e.id}
                name={e.name}
                img={e.image}
                diet={

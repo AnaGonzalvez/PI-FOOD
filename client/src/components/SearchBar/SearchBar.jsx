@@ -16,8 +16,16 @@ export default function SearchBar(){
 
  function handleSubmit(e){
   e.preventDefault();
-  dispatch(searchRecipe(name));
-  setName('');
+  if(name !== ''){
+   try {
+    dispatch(searchRecipe(name));
+   } catch (error) {
+    alert('Recipe not found')
+   }   
+   setName('');
+  } else {
+   alert('Should introduce a name to search')
+  }  
  }
 
  return(

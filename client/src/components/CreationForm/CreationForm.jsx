@@ -75,17 +75,16 @@ export default function CreationForm() {
   if(Object.values(error).length > 0) alert('Complete all the requiered fields');
   else if(input.name === '' || input.summary === '' || input.health_score === 0 || input.steps === '' || input.diets.length === 0) alert('Complete all the required fields');
   else{
-  dispatch(postRecipe(input));
-  alert('Recipe created successfully')
-  setInput({
-    name: "",
-    image: "",
-    summary: "",
-    health_score: 0,
-    steps: "",
-    diets: [],
-  });  
-  history.push('/home');
+   dispatch(postRecipe(input));
+   setInput({
+     name: "",
+     image: "",
+     summary: "",
+     health_score: 0,
+     steps: "",
+     diets: [],
+   });
+   history.push("/home");     
  }
  };
 
