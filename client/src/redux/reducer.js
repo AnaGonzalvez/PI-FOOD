@@ -13,7 +13,10 @@ const initialState = {
  recipes: [],
  recipesCopy: [],
  recipeDetail: {},
- diets: []
+ diets: [],
+ filter: '',
+ sortAlf: '',
+ sortNum: ''
 }
 
 
@@ -28,7 +31,8 @@ function Reducer(state = initialState, action){
    case FILTER_BY_DIET:
      const allRecipes = state.recipesCopy;
      let recipesFiltered = allRecipes;
-        action.payload === "lacto vegetarian"
+     if(action.payload !== 'All'){
+      action.payload === "lacto vegetarian"
           ? (recipesFiltered = allRecipes.filter((e) =>
               e.diet
                 ? e.diet?.includes("lacto ovo vegetarian")
@@ -48,39 +52,50 @@ function Reducer(state = initialState, action){
               e.diet
                 ? e.diet?.includes(action.payload)
                 : e.diets?.find((e) => e.name === action.payload)
-            ));        
+            ));
+     }                
      return {
        ...state,
+       filter: action.payload,
        recipes: recipesFiltered,
      };
    case SORT_BY_ALPHABET:
-    let sortedRecipes = action.payload === 'Asc' ? 
-     state.recipes.sort((a,b) =>{
-     if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-     if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
-     return 0;
-    }) : state.recipes.sort((a,b) =>{
-     if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
-     if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
-     return 0;
-    });
+     let sortedRecipes = state.recipes;
+     if( action.payload !== 'All'){
+      sortedRecipes = action.payload === "Asc"
+         ? state.recipes.sort((a, b) => {
+             if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
+             if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+             return 0;
+           })
+         : state.recipes.sort((a, b) => {
+             if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
+             if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+             return 0;
+           });
+     }     
      return {
       ...state,
+      sortAlf: action.payload,
       recipes: sortedRecipes
      };
    case SORT_BY_HEALTHSCORE:
-    let sortedHealthscore = action.payload === 'LowToHigh'?
+    let sortedHealthscore = state.recipes;
+    if( action.payload !== 'All'){
+     sortedHealthscore = action.payload === 'LowToHigh'?
     state.recipes.sort((a,b) =>{
-     if (a.name.toLowerCase() < b.name.toLowerCase()) return 1;
-     if (a.name.toLowerCase() > b.name.toLowerCase()) return -1;
+     if (a.health_score > b.health_score) return 1;
+     if (a.health_score < b.health_score) return -1;
      return 0;
     }) : state.recipes.sort((a,b) =>{
-     if (a.name.toLowerCase() > b.name.toLowerCase()) return 1;
-     if (a.name.toLowerCase() < b.name.toLowerCase()) return -1;
+     if (a.health_score < b.health_score) return 1;
+     if (a.health_score > b.health_score) return -1;
      return 0;
-    });    
+    });   
+    }     
      return {
       ...state,
+      sortNum: action.payload,
       recipes: sortedHealthscore
      };
    case SEARCH_RECIPE:

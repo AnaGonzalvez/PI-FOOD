@@ -15,14 +15,14 @@ import style from './Home.module.css';
 
 export default function Home(){
  const allrecipes = useSelector((state) => state.recipes);
+ const filterApply = useSelector((state) => state.filter);
+ const sortAlfApply = useSelector((state) => state.sortAlf);
+ const sortNumApply = useSelector((state) => state.sortNum);
  const dispatch = useDispatch();
 
  const [currentPage, setcurrentPage] = useState(1);
  const [recipesPerPage, setrecipesPerPage] = useState(9);
  const [order, setOrder] = useState('');
- const [filter, setFilter] = useState('');
- const [data, setData] = useState('');
- const [data2, setData2] = useState("");
 
  const lastRecipe = currentPage * recipesPerPage; //9 - 18 
  const firstRecipe = lastRecipe - recipesPerPage; //0 - 9
@@ -33,7 +33,7 @@ export default function Home(){
   if(allrecipes.length === 0){
    dispatch(getAllRecipes());
   }   
- },[dispatch, allrecipes]);
+ },[dispatch, allrecipes.length]);
 
 
  function handleClick(e){
@@ -44,7 +44,6 @@ export default function Home(){
  function handleFilterByDiet(e) {
   e.preventDefault();
   dispatch(filterByDiet(e.target.value));
-  setFilter(e.target.value);
  };
 
  function handleSortByAlphabet(e){
@@ -52,7 +51,6 @@ export default function Home(){
   dispatch(sortByAlphabet(e.target.value));
   setcurrentPage(1);
   setOrder(`Ordenado ${e.target.value}`);
-  setData(e.target.value);
  };
 
  function handleSortByHealthscore(e){
@@ -60,7 +58,6 @@ export default function Home(){
   dispatch(sortByHealthscore(e.target.value));
   setcurrentPage(1);
   setOrder(`Ordenado ${e.target.value}`);
-  setData2(e.target.value);
  };
 
  return (
@@ -68,9 +65,7 @@ export default function Home(){
      <Nav />
 
      <div className={style.container2}>
-       <button onClick={(e) => handleClick(e)} className={style.btnRefresh}>
-         Refresh Recipes
-       </button>
+       <button onClick={(e) => handleClick(e)} className={style.btnRefresh}>Refresh Recipes</button>
 
        <div className={style.sort}>
          <label className={style.label2}>Sort by:</label>
@@ -81,24 +76,24 @@ export default function Home(){
              onClick={(e) => handleSortByAlphabet(e)}
              className={style.select}
            >
-             <option disabled selected>Choose</option>
+             <option value='All'>Choose</option>
              <option value="Asc">A-Z</option>
              <option value="Desc">Z-A</option>
            </select>
-           {/* <p>{data}</p> */}
+           <p className={style.sortAlfApply}>{sortAlfApply === ''? null : sortAlfApply === 'All'? 'sort not applied': sortAlfApply === 'Asc'? 'from A to Z': 'from Z to A'}</p>
          </div>
          <div>
            <label className={style.label}>Health Score</label>
            <select
              name="health_score"
              onClick={(e) => handleSortByHealthscore(e)}
-             className={style.select}
+             className={style.select}             
            >
-             <option disabled selected>Choose</option>
+             <option value='All'>Choose</option>
              <option value="LowToHigh">Low to High</option>
              <option value="HighToLow">High to Low</option>
            </select>
-           {/* <p>{data2}</p> */}
+           <p className={style.sortNumApply}>{sortNumApply === ''? null : sortNumApply === 'All'? 'sort not applied' : sortNumApply === 'LowToHigh'? 'from Low to High' : 'from High to Low'}</p>
          </div>
        </div>
 
@@ -109,9 +104,9 @@ export default function Home(){
            <select
              name="diet"
              onClick={(e) => handleFilterByDiet(e)}
-             className={style.select}
+             className={style.select}            
            >
-             <option disabled selected>Choose</option>
+             <option value='All'>Choose</option>
              <option value="gluten free">gluten free</option>
              <option value="ketogenic">ketogenic</option>
              <option value="vegetarian">vegetarian</option>
@@ -125,7 +120,7 @@ export default function Home(){
              <option value="low FODMAP">low FODMAP</option>
              <option value="whole 30">whole 30</option>
            </select>
-           {/* <p>{filter}</p> */}
+           <p className={style.filterApply}>{filterApply === '' ? null : filterApply === 'All'? 'filter not applied' : filterApply}</p>
          </div>
        </div>
      </div>
@@ -151,7 +146,7 @@ export default function Home(){
                }
              />
            </Link>
-         ))}{" "}
+         ))}
      </div>
    </div>
  );

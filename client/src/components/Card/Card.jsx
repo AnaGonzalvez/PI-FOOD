@@ -1,6 +1,7 @@
 import React from "react";
 import style from './Card.module.css';
 
+ 
 export default function Card({ name, img, diet }){
  return (
    <div className={style.cardBox}>    
@@ -19,9 +20,7 @@ export default function Card({ name, img, diet }){
      )}
      <div className={style.cardName}>{name}</div>
      <div className={style.cardDietTypes}>
-     {diet?.map((e) => (
-      e? <span className={style.cardItem} key={e}>{e}</span> : <></> 
-     ))}</div>
+     {diet?.map((e) => e? <span className={style.cardItem} key={e}>{e}</span> : <></>)}</div>
    </div>
  );
 };

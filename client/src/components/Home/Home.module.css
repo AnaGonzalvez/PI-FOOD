@@ -125,3 +125,24 @@
  justify-content: center;
  align-items: center;
 }
+
+.filterApply{
+ font-size: 12px;
+ margin-left: 80px;
+ margin-bottom: 1px;
+ margin-top: 1px;
+}
+
+.sortAlfApply{
+ font-size: 12px;
+ margin-left: 90px;
+ margin-bottom: 1px;
+ margin-top: 1px;
+}
+
+.sortNumApply{
+ font-size: 12px;
+ margin-left: 100px;
+ margin-bottom: 1px;
+ margin-top: 1px;
+}
