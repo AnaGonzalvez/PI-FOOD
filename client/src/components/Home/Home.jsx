@@ -24,8 +24,8 @@ export default function Home(){
  const [recipesPerPage, setrecipesPerPage] = useState(9);
  const [order, setOrder] = useState('');
 
- const lastRecipe = currentPage * recipesPerPage; //9 - 18 
- const firstRecipe = lastRecipe - recipesPerPage; //0 - 9
+ const lastRecipe = currentPage * recipesPerPage; //9
+ const firstRecipe = lastRecipe - recipesPerPage; //9-9 0
  const currentRecipes = allrecipes.slice(firstRecipe,lastRecipe);
  
 

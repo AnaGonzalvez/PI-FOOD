@@ -29,18 +29,12 @@ export default function Pages( { currentPage, recipesPerPage, allrecipes, setcur
 
  return (
    <div className={style.container}>
-     <button onClick={() => prev()} className={style.btn2}>
-       Prev
-     </button>
+     <button onClick={() => prev()} className={style.btn2}>Prev</button>
      {pagenum &&
        pagenum.map((e) => (
-         <button key={e} id={e} onClick={() => page(e)} className={currentPage === e? style.btn : style.btn3}>
-           {e}
-         </button>
+         <button key={e} id={e} onClick={() => page(e)} className={currentPage === e? style.btn : style.btn3}>{e}</button>
        ))}
-     <button onClick={() => next()} className={style.btn2}>
-       Next
-     </button>
+     <button onClick={() => next()} className={style.btn2}>Next</button>
    </div>
  );
 };

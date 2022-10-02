@@ -20,7 +20,7 @@ export default function Card({ name, img, diet }){
      )}
      <div className={style.cardName}>{name}</div>
      <div className={style.cardDietTypes}>
-     {diet?.map((e) => e? <span className={style.cardItem} key={e}>{e}</span> : <></>)}</div>
+     {diet?.map((e) => e? <span className={style.cardItem} key={e}>{e}</span> : null)}</div>
    </div>
  );
 };
