@@ -69,15 +69,3 @@ describe('Diet routes', () =>{
     agent.get("/diets").expect(200));
   });
 })
-
-
-
-
-
-/* 
-    const response2 = await agent.post("/recipes").send({ name: "Pizza" });
-    expect(response2.statusCode).to.be.equal(404);
-    const response3 = await agent
-      .post("/recipes")
-      .send({ name: "Pizza", health_score: 15 });
-    expect(response3.statusCode).to.be.equal(404); */

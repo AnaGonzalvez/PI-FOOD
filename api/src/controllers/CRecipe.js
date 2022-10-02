@@ -5,7 +5,7 @@ const { API_KEY, API_KEY1, API_KEY2 } = process.env;
 
 
 const getApiRecipes = async () => {
- const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY1}&addRecipeInformation=true&number=10`);
+ const recipesApi = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY2}&addRecipeInformation=true&number=100`);
   
  const recipes = await recipesApi.data.results.map(e => {
   let vegetarian = e.vegetarian && 'vegetarian';
@@ -88,7 +88,7 @@ const detailDb = async (id) =>{
 };
 
 const detailApi = async (id) =>{
- const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY1}`);
+ const recipeDetails = await axios.get(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${API_KEY2}`);
 
  if(recipeDetails.data){
   return {
