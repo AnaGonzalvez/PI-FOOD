@@ -62,7 +62,7 @@ export default function Home(){
 
  return (
    <div className={style.container}>
-     <Nav />
+     <Nav /> 
 
      <div className={style.container2}>
        <button onClick={(e) => handleClick(e)} className={style.btnRefresh}>Refresh Recipes</button>
