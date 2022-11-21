@@ -15,16 +15,16 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     image: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     summary: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
     health_score: {
       type: DataTypes.INTEGER,
     },
     steps: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
     },
   });
 };
