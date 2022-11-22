@@ -1,4 +1,5 @@
 import axios from 'axios';
+
 export const GET_ALL_RECIPES = 'GEL_ALL_RECIPES';
 export const FILTER_BY_DIET = "FILTER_BY_DIET";
 export const SORT_BY_ALPHABET = 'SORT_BY_ALPHABET';
@@ -8,10 +9,12 @@ export const GET_RECIPE_DETAIL = 'GET_RECIPE_DETAIL';
 export const POST_RECIPE = 'POST_RECIPE';
 export const GET_ALL_DIETS = 'GET_ALL_DIETS';
 
+axios.defaults.baseURL = process.env.REACT_APP_API;
+
 export function getAllRecipes(){
  return async (dispatch)=>{  
   try {
-  let result = await axios.get("/recipes");
+  let result = await axios.get('/recipes');
   return dispatch({
    type: GET_ALL_RECIPES,
    payload: result.data
