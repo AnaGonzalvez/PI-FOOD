@@ -11,7 +11,7 @@ export const GET_ALL_DIETS = 'GET_ALL_DIETS';
 export function getAllRecipes(){
  return async (dispatch)=>{  
   try {
-  let result = await axios.get("http://localhost:3001/recipes");
+  let result = await axios.get("/recipes");
   return dispatch({
    type: GET_ALL_RECIPES,
    payload: result.data
@@ -53,7 +53,7 @@ export function sortByHealthscore(healthScore){
 export function searchRecipe(name){ 
  return async (dispatch) =>{
   try {
-  let result = await axios.get(`http://localhost:3001/recipes?name=${name}`);      
+  let result = await axios.get(`/recipes?name=${name}`);      
   return dispatch({
    type: SEARCH_RECIPE,
    payload: result.data
@@ -68,7 +68,7 @@ export function searchRecipe(name){
 export function getRecipeDetail(id){
  return async (dispatch) =>{
   try {
-   let result = await axios.get(`http://localhost:3001/recipes/${id}`);
+   let result = await axios.get(`/recipes/${id}`);
    return dispatch({
     type: GET_RECIPE_DETAIL,
     payload: result.data
@@ -82,7 +82,7 @@ export function getRecipeDetail(id){
 
 export function getAllDiets(){
  return async (dispatch) =>{
-  let result = await axios.get("http://localhost:3001/diets");
+  let result = await axios.get("/diets");
   return dispatch({
    type: GET_ALL_DIETS,
    payload: result.data
@@ -93,7 +93,7 @@ export function getAllDiets(){
 export function postRecipe(recipe){
  return async ()=>{
   try {
-   await axios.post("http://localhost:3001/recipes/", recipe);
+   await axios.post("/recipes/", recipe);
    return alert("Recipe created successfully");
   } catch (error) {
    return alert('Recipe already created');
