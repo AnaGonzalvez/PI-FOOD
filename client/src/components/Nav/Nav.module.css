@@ -11,6 +11,8 @@
 }
 
 .title{
+ display: grid;
+ grid-auto-flow: row;
  color: white; 
  font-family: 'Kanit', sans-serif;
  font-size: 20px;

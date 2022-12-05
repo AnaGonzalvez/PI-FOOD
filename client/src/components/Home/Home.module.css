@@ -22,6 +22,7 @@
 }
 
 .btnRefresh{
+ display: grid;
  position: relative;
  font-family: 'Kanit', sans-serif;
  font-size: 16px;
@@ -30,8 +31,8 @@
  background: #F07928;
  box-shadow: 1px 3px 5px 0px grey;
  color: #FEF2E8;
- width: 150px;
- height: 30px; 
+ width:fit-content;
+ height:fit-content; 
  outline: none;
  cursor: pointer;
 }
@@ -42,41 +43,44 @@
 }
 
 .container{
+ display: grid;
  background-color: #FEF2E8;
- padding-bottom: 125px;
- height: max-content;
+ /* padding-bottom: 125px; */
+ height: fit-content;
+ width: fit-content;
 }
 
 .container2{
  display: flex;
- flex-direction: row;
  justify-content: space-between;
  margin-left: 10px;
  margin-right: 10px;
 }
 
 .sort{
+ display: grid;
  font-family: 'Kanit', sans-serif;
  font-size: 16px;
  border: 1px solid #37265F;
- border-radius: 10px;
+ border-radius: 10px;/* 
  margin-left: 800px;
- margin-right: 10px;
+ margin-right: 10px; */
  background: #603162;
  color: white;
- width: 250px;
+ width:fit-content;
  box-shadow: 1px 3px 5px 0px grey;
 }
 
 .filter{
+ display: grid;
  font-family: 'Kanit', sans-serif;
  font-size: 16px;
  border: 1px solid #37265F;
  border-radius: 10px;
  background: #603162;
- color: white;
- margin-right: 10px;
- width: 250px;
+ color: white;/* 
+ margin-right: 10px; */
+ width: fit-content;
  box-shadow: 1px 3px 5px 0px grey;
 }
 
@@ -122,6 +126,7 @@
 .paged{
  display: flex;
  flex-direction: row;
+ flex-wrap: wrap;
  justify-content: center;
  align-items: center;
 }
